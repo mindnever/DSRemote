@@ -34,6 +34,10 @@
 #include "serial_decoder.cpp"
 
 
+inline double exp10(double val)
+{
+    return pow(10.0, val);
+}
 
 void UI_Mainwindow::open_settings_dialog()
 {

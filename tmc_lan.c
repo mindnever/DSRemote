@@ -62,6 +62,12 @@ struct timeval timeout;
 
 fd_set tcp_fds;  /* filedescriptor pool */
 
+#ifndef MSG_NOSIGNAL
+# define MSG_NOSIGNAL 0
+# ifdef SO_NOSIGPIPE
+#  define USE_SO_NOSIGPIPE
+# endif
+#endif
 
 
 
@@ -119,6 +125,14 @@ struct tmcdev * tmclan_open(const char *ip_address)
   {
     return NULL;
   }
+
+#ifdef USE_SO_NOSIGPIPE
+  int val = 1;
+  if(setsockopt(sockfd, SOL_SOCKET, SO_NOSIGPIPE, (void*)&val, sizeof(val)) < 0)
+  {
+    return NULL;
+  }
+#endif
 
   FD_ZERO(&tcp_fds);         /* clear file descriptor pool     */
   FD_SET(sockfd, &tcp_fds);  /* add our filedescriptor to pool */

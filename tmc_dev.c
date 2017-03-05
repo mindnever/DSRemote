@@ -25,7 +25,7 @@
 ***************************************************************************
 */
 
-
+#if 0
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
@@ -283,26 +283,4 @@ int tmcdev_read(struct tmcdev *dev)
   return dev->sz;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif

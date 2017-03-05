@@ -36,11 +36,12 @@ struct tmcdev *tmc_device;
 
 
 
-struct tmcdev * tmc_open_usb(const char *device)
+struct tmcdev * tmc_open_usb(__attribute__((unused)) const char *device)
 {
   tmc_connection_type = 0;
-
+#if 0
   tmc_device = tmcdev_open(device);
+#endif
 
   return tmc_device;
 }
@@ -60,7 +61,9 @@ void tmc_close(void)
 {
   if(tmc_connection_type == 0)
   {
+#if 0
     tmcdev_close(tmc_device);
+#endif
   }
   else
   {
@@ -75,7 +78,9 @@ int tmc_write(const char *cmd)
 {
   if(tmc_connection_type == 0)
   {
+#if 0
     return tmcdev_write(tmc_device, cmd);
+#endif
   }
   else
   {
@@ -90,7 +95,9 @@ int tmc_read(void)
 {
   if(tmc_connection_type == 0)
   {
+#if 0
     return tmcdev_read(tmc_device);
+#endif
   }
   else
   {
